@@ -2,7 +2,7 @@
 
 namespace CompanyTree.BLL.Implementation
 {
-    public class Class1
+    public class CompanyTreeContainer
     {
     }
 }

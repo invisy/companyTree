@@ -1,7 +1,12 @@
-﻿namespace CompanyTree.Models
+﻿using System;
+
+namespace CompanyTree.Models
 {
-    public class Employee
+    public abstract class Employee : BaseModel<int>
     {
-        
+        private string name;
+        private int salary;
+        private Type position;
+        private Employee supervisor;
     }
 }
