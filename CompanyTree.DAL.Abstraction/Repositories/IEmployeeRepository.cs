@@ -4,6 +4,6 @@ namespace CompanyTree.DAL.Abstraction.Repositories
 {
     public interface IEmployeeRepository : IRepository<EmployeeEntity, int>
     {
-        
+        EmployeeEntity GetRoot();
     }
 }

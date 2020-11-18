@@ -1,4 +1,4 @@
-﻿namespace CompanyTree.Models
+﻿namespace CompanyTree.Models.Abstractions
 {
 
     public abstract class BaseModel<TKey>

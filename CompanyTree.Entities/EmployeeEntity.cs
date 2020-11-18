@@ -4,7 +4,8 @@
     {
         public string Name { get; set; }
         public int Salary { get; set; }
-        public EmployeePosition Position { get; set; }
-        public EmployeeEntity Supervisor { get; set; }
+        public int positionId { get; set; }
+        public int? parentId { get; set; }
+        public int? supervisorId { get; set; }
     }
 }

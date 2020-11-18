@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NotSimpleGame.Utils
+namespace CompanyTree.Utils
 {
     public interface IIoCContainer
     {
