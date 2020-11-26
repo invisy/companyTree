@@ -1,10 +1,9 @@
-﻿using System;
-
-namespace CompanyTree.Entities
+﻿namespace CompanyTree.Entities
 {
-    public class EmployeePosition : BaseEntity<int>
+    public enum EmployeePosition
     {
-        private string PositionName { get; set; }
-        private bool IsComposite { get; set; }
+        Director,
+        Manager,
+        SimpleEmployee
     }
 }

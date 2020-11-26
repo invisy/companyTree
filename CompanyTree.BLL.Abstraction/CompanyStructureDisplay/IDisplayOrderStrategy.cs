@@ -1,0 +1,10 @@
+﻿using System.Collections.Generic;
+using CompanyTree.Models.Abstractions;
+
+namespace CompanyTree.BLL.Abstraction.CompanyStructureDisplay
+{
+    public interface IDisplayOrderStrategy
+    {
+        IEnumerable<Employee> GetStructure(Employee employee);
+    }
+}

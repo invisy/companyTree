@@ -8,8 +8,8 @@ namespace CompanyTree.BLL.Implementation.Mappers
     {
         public override Employee Map(EmployeeEntity entity)
         {
-            Employee employee = new EmployeeComposite(entity.Name, entity.Salary, entity.positionId, entity.supervisorId);
-            return employee;
+            //Employee employee = new EmployeeComposite(entity.Name, entity.Salary, entity.positionId, entity.supervisorId);
+            return null;
         }
 
         public override EmployeeEntity Map(Employee model)
@@ -17,8 +17,7 @@ namespace CompanyTree.BLL.Implementation.Mappers
             EmployeeEntity entity = new EmployeeEntity();
             entity.Name = model.Name;
             entity.Salary = model.Salary;
-            entity.positionId = model.PositionId;
-            entity.supervisorId = model.SupervisorId;
+            //entity.positionId = model.Position;
             return entity;
         }
     }

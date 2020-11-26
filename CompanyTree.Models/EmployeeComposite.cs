@@ -7,30 +7,40 @@ namespace CompanyTree.Models
     {
         private readonly List<Employee> _children;
 
-        public EmployeeComposite(string name, int salary, int positionId, int? supervisorId) 
-                                :base(name, salary, positionId, supervisorId)
+        protected EmployeeComposite(string name, int salary, Position position) 
+                                :base(name, salary, position)
         {
             _children = new List<Employee>();
         }
         
-        public virtual void Add(Employee component)
+        public override void Add(Employee component)
         {
             _children.Add(component);
         }
 
-        public virtual void Remove(Employee component)
+        public override void Remove(Employee component)
         {
             _children.Remove(component);
         }
 
-        public virtual IEnumerable<Employee> GetChildren(Employee component)
+        public override IEnumerable<Employee> GetChildren()
         {
             return _children;
         }
 
+        public override bool HasSupervisor()
+        {
+            throw new System.NotImplementedException();
+        }
+
         public override void Accept(IVisitor visitor)
         {
-            visitor.Visit(this);
+            throw new System.NotImplementedException();
+        }
+
+        public override bool IsComposite() 
+        {
+            return true;
         }
     }
 }

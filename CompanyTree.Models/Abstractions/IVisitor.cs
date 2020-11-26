@@ -1,8 +1,11 @@
-﻿namespace CompanyTree.Models.Abstractions
+﻿using CompanyTree.Models.Managers;
+
+namespace CompanyTree.Models.Abstractions
 {
     public interface IVisitor
     {
-        void Visit(EmployeeComposite employee);
-        void Visit(EmployeeLeaf employee);
+        void Visit(Director employee);
+        void Visit(Manager employee);
+        void Visit(SimpleEmployee employee);
     }
 }
