@@ -9,17 +9,16 @@ namespace CompanyTree.BLL.Implementation.Visitors
     public class WithPositionFinderVisitor : IWithPositionFinderVisitor
     {
         private readonly List<Employee> _employees;
-        private readonly Position _position;
+        public Position Position { get; set; } = 0;
 
-        public WithPositionFinderVisitor(Position position)
+        public WithPositionFinderVisitor()
         {
             _employees = new List<Employee>();
-            _position = position;
         }
         
         private void VisitComposite(Employee employee)
         {
-            if(employee.Position == _position)
+            if(employee.Position == Position)
                 _employees.Add(employee);
             
             IEnumerable<Employee> subEmployees = employee.GetChildren();
@@ -40,7 +39,7 @@ namespace CompanyTree.BLL.Implementation.Visitors
 
         public void Visit(SimpleEmployee employee)
         {
-            if(employee.Position == _position)
+            if(employee.Position == Position)
                 _employees.Add(employee);
         }
 

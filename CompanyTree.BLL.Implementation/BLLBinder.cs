@@ -22,9 +22,9 @@ using CompanyTree.Models.Abstractions;
 
 namespace CompanyTree.BLL.Implementation
 {
-    public static class BLBinder
+    public static class BLLBinder
     {
-        public static void BindBL(this IIoCContainer container)
+        public static void BindBLL(this IIoCContainer container)
         {
             container.Register<ILoaderService, LoaderServiceDummy>();
             container.Register<ICompanyTreeService, CompanyTreeService>();
@@ -35,6 +35,7 @@ namespace CompanyTree.BLL.Implementation
             container.Register<ICompanyStructureDirectStrategy, CompanyStructureDirectStrategy>();
             container.Register<ICompanyStructureByPositionStrategy, CompanyStructureByPositionStrategy>();
             container.Register<IMapper<EmployeeEntity, Employee>, EmployeeMapper>();
+            container.RegisterSingleton<TreeContainer, TreeContainer>();
         }
     }
 }

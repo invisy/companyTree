@@ -12,17 +12,18 @@ namespace CompanyTree.BLL.Implementation.Services
     {
         private IUnitOfWork _unitOfWork;
         private IMapper<EmployeeEntity, Employee> _employeeMapper;
+        private TreeContainer _containerInstance;
         
-        public LoaderService(IUnitOfWork unitOfWork, IMapper<EmployeeEntity, Employee> employeeMapper)
+        public LoaderService(IUnitOfWork unitOfWork, TreeContainer container, IMapper<EmployeeEntity, Employee> employeeMapper)
         {
             _unitOfWork = unitOfWork;
             _employeeMapper = employeeMapper;
+            _containerInstance = container;
         }
 
         public void LoadData()
         {
-            TreeContainer containerInstance = TreeContainer.GetInstance();
-            containerInstance.Root = _employeeMapper.Map(_unitOfWork.Repository<IEmployeeRepository>().GetRoot());
+            _containerInstance.Root = _employeeMapper.Map(_unitOfWork.Repository<IEmployeeRepository>().GetRoot());
         }
 
         public void SaveData()

@@ -6,7 +6,7 @@ namespace CompanyTree.Models
     public class SimpleEmployee : Employee
     {
         protected SimpleEmployee(string name, int salary, Position position, Employee supervisor) 
-                            : base(name, salary, position)
+            : base(name, salary, position)
         {
             this.Supervisor = supervisor;
         }

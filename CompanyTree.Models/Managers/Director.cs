@@ -4,7 +4,7 @@ namespace CompanyTree.Models.Managers
 {
     public class Director : EmployeeComposite
     {
-        protected Director(string name, int salary) : base(name, salary, Position.Director)
+        public Director(string name, int salary) : base(name, salary, Position.Director)
         {
         }
         

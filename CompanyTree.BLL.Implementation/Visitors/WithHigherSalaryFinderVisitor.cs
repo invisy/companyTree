@@ -9,17 +9,16 @@ namespace CompanyTree.BLL.Implementation.Visitors
     public class WithHigherSalaryFinderVisitor : IWithHigherSalaryFinderVisitor
     {
         private readonly List<Employee> _employees;
-        private readonly int _salary;
+        public int Salary { get; set; } = 0;
 
-        public WithHigherSalaryFinderVisitor(int salary)
+        public WithHigherSalaryFinderVisitor()
         {
             _employees = new List<Employee>();
-            _salary = salary;
         }
         
         private void VisitComposite(Employee employee)
         {
-            if(employee.Salary > _salary)
+            if(employee.Salary > Salary)
                 _employees.Add(employee);
             
             IEnumerable<Employee> subEmployees = employee.GetChildren();
@@ -40,7 +39,7 @@ namespace CompanyTree.BLL.Implementation.Visitors
 
         public void Visit(SimpleEmployee employee)
         {
-            if(employee.Salary > _salary)
+            if(employee.Salary > Salary)
                 _employees.Add(employee);
         }
 

@@ -20,9 +20,19 @@ namespace CompanyTree.BLL.Implementation.Services
             _withPositionFinderVisitor = withPositionFinderVisitor;
         }
 
+        public Employee GetRoot()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public IEnumerable<Employee> SetRoot(Employee employee)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public IEnumerable<Employee> GetEmployeesWithMaxSalary(Employee employee)
         {
-            var visitor = new WithMaxSalaryFinderVisitor();
+            var visitor = _withMaxSalaryFinderVisitor;
             employee.Accept(visitor);
 
             return visitor.GetEmployees();
@@ -30,7 +40,8 @@ namespace CompanyTree.BLL.Implementation.Services
 
         public IEnumerable<Employee> GetEmployeesWithHigherSalary(Employee employee, int salary)
         {
-            var visitor = new WithHigherSalaryFinderVisitor(salary);
+            var visitor = _withHigherSalaryFinderVisitor;
+            visitor.Salary = salary;
             employee.Accept(visitor);
 
             return visitor.GetEmployees();
@@ -38,7 +49,8 @@ namespace CompanyTree.BLL.Implementation.Services
 
         public IEnumerable<Employee> GetEmployeesWithPosition(Employee employee, Position position)
         {
-            var visitor = new WithPositionFinderVisitor(position);
+            var visitor = _withPositionFinderVisitor;
+            visitor.Position = position;
             employee.Accept(visitor);
 
             return visitor.GetEmployees();

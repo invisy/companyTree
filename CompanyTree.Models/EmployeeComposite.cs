@@ -8,7 +8,7 @@ namespace CompanyTree.Models
         private readonly List<Employee> _children;
 
         protected EmployeeComposite(string name, int salary, Position position) 
-                                :base(name, salary, position)
+            :base(name, salary, position)
         {
             _children = new List<Employee>();
         }

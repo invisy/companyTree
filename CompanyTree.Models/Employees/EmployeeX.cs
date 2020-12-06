@@ -4,7 +4,7 @@ namespace CompanyTree.Models.Employees
 {
     public class EmployeeX : SimpleEmployee
     {
-        protected EmployeeX(string name, int salary, Employee supervisor) 
+        public EmployeeX(string name, int salary, Employee supervisor) 
             : base(name, salary, Position.EmployeeX, supervisor)
         {
         }
