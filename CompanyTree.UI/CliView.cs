@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using CompanyTree.UI.Exceptions;
 
 namespace CompanyTree.UI
 {
     public enum MainMenu
     {
+        Exit,
         AddEmployee,
         SelectFindWithMaxSalary,
         SelectFindWithHigherSalary,
@@ -12,55 +14,56 @@ namespace CompanyTree.UI
     }
     public class CliView
     {
-        public short Main()
+        public int Main()
         {
             Console.WriteLine("\t Select option: \n" +
                               "1. Add Employee \n" +
                               "2. Find employees with max salary \n" +
                               "3. Find employees with higher salary \n" +
-                              "4. Find employees with position \n");
-            String value = Console.ReadLine();
-            return short.Parse(value);
+                              "4. Find employees with position \n" +
+                              "0. Exit \n");
+            string value = Console.ReadLine();
+            return GetNumber(value);
         }
         
-        public short ShowEmployeeList(List<String> employees)
+        public int ShowEmployeeList(List<string> employees)
         {
-            foreach (var employee in employees)
+            foreach (string employee in employees)
             {
                 Console.WriteLine($"\t - {employee}");
             }
             Console.WriteLine("\t Select option: \n" +
-                              "1. Go to main \n");
-            String value = Console.ReadLine();
-            return short.Parse(value);
+                              "0. Go to main \n");
+            string value = Console.ReadLine();
+            return GetNumber(value);
         }
         
-        public short SelectByEmployeeList(List<String> employees)
+        public int SelectByEmployeeList(List<string> employees)
         {
             Console.WriteLine("\t Select option: \n");
-            for (int i = 0; i<employees.Count;i++)
+            for (int i = 0; i < employees.Count;i++)
             {
                 Console.WriteLine($"{i}. {employees[0]}");
             }
-            Console.WriteLine($"{employees.Count+1}. Go to main \n");
-            String value = Console.ReadLine();
-            return short.Parse(value);
+            Console.WriteLine("0. Go to main \n");
+            string value = Console.ReadLine();
+            return GetNumber(value);
         }
         
         public int PrintSalary()
         {
             Console.WriteLine("\t Print salary: \n");
-            String value = Console.ReadLine();
-            return int.Parse(value);
+            string value = Console.ReadLine();
+            return GetNumber(value);
         }
         
-        public String PrintName()
+        public string PrintName()
         {
             Console.WriteLine("\t Print name: \n");
             return Console.ReadLine();
         }
 
-        public short SelectPosition()
+        public int SelectPosition()
         {
             Console.WriteLine("\t Select option: \n" +
                               "1. Director \n" +
@@ -70,9 +73,17 @@ namespace CompanyTree.UI
                               "5. EmployeeB \n" +
                               "6. EmployeeX \n" +
                               "7. EmployeeY \n" +
-                              "8. Go to main \n");
-            String value = Console.ReadLine();
-            return short.Parse(value);
+                              "0. Go to main \n");
+            string value = Console.ReadLine();
+            return GetNumber(value);
+        }
+
+        private int GetNumber(string textNumber)
+        {
+            int value = 0;
+            if(!int.TryParse(textNumber, out value))
+                throw new InvalidInputException();
+            return value;
         }
     }
 }

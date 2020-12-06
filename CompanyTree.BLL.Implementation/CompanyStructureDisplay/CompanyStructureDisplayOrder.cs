@@ -10,11 +10,6 @@ namespace CompanyTree.BLL.Implementation.CompanyStructureDisplay
     {
         public IDisplayOrderStrategy Strategy { get; set; }
         
-        public CompanyStructureDisplayOrder(IDisplayOrderStrategy strategy)
-        {
-            this.Strategy = strategy;
-        }
-
         public IEnumerable<Employee> GetStructure(Employee employee)
         {
             return Strategy.GetStructure(employee);

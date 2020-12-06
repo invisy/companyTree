@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using CompanyTree.BLL.Abstraction.CompanyStructureDisplay;
 using CompanyTree.BLL.Abstraction.Services;
 using CompanyTree.BLL.Abstraction.Visitors;
 using CompanyTree.BLL.Implementation.Visitors;
@@ -8,26 +9,38 @@ namespace CompanyTree.BLL.Implementation.Services
 {
     public class CompanyTreeService : ICompanyTreeService
     {
+        private readonly TreeContainer _treeContainer;
+        
         private readonly IWithHigherSalaryFinderVisitor _withHigherSalaryFinderVisitor;
         private readonly IWithMaxSalaryFinderVisitor _withMaxSalaryFinderVisitor;
         private readonly IWithPositionFinderVisitor _withPositionFinderVisitor;
         
+        private readonly ICompanyStructureDisplayOrder _displayOrder;
+        private readonly ICompanyStructureDirectStrategy _directStrategy;
+        private readonly ICompanyStructureByPositionStrategy _byPositionStrategy;
+        
         public CompanyTreeService(IWithHigherSalaryFinderVisitor withHigherSalaryFinderVisitor
-            , IWithMaxSalaryFinderVisitor withMaxSalaryFinderVisitor, IWithPositionFinderVisitor withPositionFinderVisitor)
+            , IWithMaxSalaryFinderVisitor withMaxSalaryFinderVisitor, IWithPositionFinderVisitor withPositionFinderVisitor
+            ,ICompanyStructureDisplayOrder displayOrder, ICompanyStructureDirectStrategy directStrategy
+            , ICompanyStructureByPositionStrategy byPositionStrategy, TreeContainer treeContainer)
         {
             _withHigherSalaryFinderVisitor = withHigherSalaryFinderVisitor;
             _withMaxSalaryFinderVisitor = withMaxSalaryFinderVisitor;
             _withPositionFinderVisitor = withPositionFinderVisitor;
+            _displayOrder = displayOrder;
+            _directStrategy = directStrategy;
+            _byPositionStrategy = byPositionStrategy;
+            _treeContainer = treeContainer;
         }
 
         public Employee GetRoot()
         {
-            throw new System.NotImplementedException();
+            return _treeContainer.Root;
         }
 
-        public IEnumerable<Employee> SetRoot(Employee employee)
+        public void SetRoot(Employee employee)
         {
-            throw new System.NotImplementedException();
+            _treeContainer.Root = employee;
         }
 
         public IEnumerable<Employee> GetEmployeesWithMaxSalary(Employee employee)
@@ -58,12 +71,14 @@ namespace CompanyTree.BLL.Implementation.Services
 
         public IEnumerable<Employee> GetDirectCompanyStructure(Employee employee)
         {
-            throw new System.NotImplementedException();
+            _displayOrder.Strategy = _directStrategy;
+            return _displayOrder.GetStructure(employee);
         }
 
         public IEnumerable<Employee> GetByPositionCompanyStructure(Employee employee)
         {
-            throw new System.NotImplementedException();
+            _displayOrder.Strategy = _byPositionStrategy;
+            return _displayOrder.GetStructure(employee);
         }
     }
 }
