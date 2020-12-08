@@ -21,11 +21,11 @@ namespace CompanyTree.BLL.Implementation.CompanyStructureDisplay
         {
             _employees.Add(employee);
 
-            IEnumerable<Employee> children = employee.GetChildren();
-
-            foreach (var subEmployee in children)
+            if (employee.IsComposite())
             {
-                if(subEmployee.IsComposite())
+                IEnumerable<Employee> children = employee.GetChildren();
+
+                foreach (var subEmployee in children)
                     GetNext(subEmployee);
             }
         }

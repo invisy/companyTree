@@ -12,6 +12,7 @@ namespace CompanyTree.BLL.Implementation.CompanyStructureDisplay
         public IEnumerable<Employee> GetStructure(Employee employee)
         {
             _employees = new List<Employee>();
+            _employees.Add(employee);
             if (employee.IsComposite())
                 GetNext(employee.GetChildren());
             return _employees;
