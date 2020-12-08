@@ -4,14 +4,6 @@ using CompanyTree.UI.Exceptions;
 
 namespace CompanyTree.UI
 {
-    public enum MainMenu
-    {
-        Exit,
-        AddEmployee,
-        SelectFindWithMaxSalary,
-        SelectFindWithHigherSalary,
-        SelectFindWithPosition
-    }
     public class CliView
     {
         public int Main()
@@ -50,14 +42,14 @@ namespace CompanyTree.UI
             return GetNumber(value);
         }
         
-        public int PrintSalary()
+        public int PrintSalaryDialog()
         {
             Console.WriteLine("\t Print salary: \n");
             string value = Console.ReadLine();
             return GetNumber(value);
         }
         
-        public string PrintName()
+        public string PrintNameDialog()
         {
             Console.WriteLine("\t Print name: \n");
             return Console.ReadLine();
