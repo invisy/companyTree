@@ -1,8 +1,10 @@
-﻿namespace CompanyTree.BLL.Abstraction.Services
+﻿using CompanyTree.Models.Abstractions;
+
+namespace CompanyTree.BLL.Abstraction.Services
 {
     public interface ILoaderService
     {
-        void LoadData();
-        void SaveData();
+        Employee LoadData();
+        void SaveData(Employee employee);
     }
 }

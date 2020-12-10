@@ -10,19 +10,25 @@ namespace CompanyTree.UI
     public class CliController
     {
         private readonly CliView _view;
-        private readonly ICompanyTreeService _companyTreeService;
-
-        public CliController(ICompanyTreeService companyTreeService, CliView cliView)
+        private readonly ICompanyTreeFinderService _companyTreeFinderService;
+        private readonly ICompanyTreeStructuringService _companyTreeStructuringService;
+        private readonly ILoaderService _loaderService;
+        private Employee _root;
+        
+        public CliController(ICompanyTreeFinderService companyTreeFinderService, 
+            ICompanyTreeStructuringService companyTreeStructuringService, ILoaderService loaderService, CliView cliView)
         {
-            _companyTreeService = companyTreeService;
+            _companyTreeFinderService = companyTreeFinderService;
+            _companyTreeStructuringService = companyTreeStructuringService;
+            _loaderService = loaderService;
             _view = cliView;
+            _root = _loaderService.LoadData();
         }
         
         public void ShowMenu()
         {
-            Employee root = _companyTreeService.GetRoot();
+            Employee root = null;
             MainMenu userVariant = (MainMenu)(_view.Main());
-            List<String> employees;
             switch (userVariant)
             {
                 case MainMenu.AddEmployee:
@@ -46,7 +52,7 @@ namespace CompanyTree.UI
 
         private void ShowAddEmployeeMenu(Employee root)
         {
-            List<String> employees = _companyTreeService.GetEmployeesWithPosition(root, Position.Director).Select(x => x.Name).ToList();
+            List<String> employees = _companyTreeFinderService.GetEmployeesWithPosition(root, Position.Director).Select(x => x.Name).ToList();
             
             int position = _view.SelectPosition();
             string name = _view.PrintNameDialog();
@@ -56,21 +62,21 @@ namespace CompanyTree.UI
         
         public void ShowEmployeeWithMaxSalary(Employee root)
         {
-            List<String> employees = _companyTreeService.GetEmployeesWithMaxSalary(root).Select(x => x.Name).ToList();
+            List<String> employees = _companyTreeFinderService.GetEmployeesWithMaxSalary(root).Select(x => x.Name).ToList();
             _view.ShowEmployeeList(employees);
         }
         
         public void ShowEmployeeWithHigherSalary(Employee root)
         {
             int salary = _view.PrintSalaryDialog();
-            List<String> employees = _companyTreeService.GetEmployeesWithHigherSalary(root, salary).Select(x => x.Name).ToList();
+            List<String> employees = _companyTreeFinderService.GetEmployeesWithHigherSalary(root, salary).Select(x => x.Name).ToList();
             _view.ShowEmployeeList(employees);
         }
         
         public void ShowEmployeeWithPosition(Employee root)
         {
             Position position = (Position)_view.SelectPosition();
-            List<String> employees = _companyTreeService.GetEmployeesWithPosition(root, position).Select(x => x.Name).ToList();
+            List<String> employees = _companyTreeFinderService.GetEmployeesWithPosition(root, position).Select(x => x.Name).ToList();
             _view.ShowEmployeeList(employees);
         }
     }

@@ -10,23 +10,21 @@ namespace CompanyTree.BLL.Implementation.Services
 {
     public class LoaderService : ILoaderService
     {
-        private IUnitOfWork _unitOfWork;
-        private IMapper<EmployeeEntity, Employee> _employeeMapper;
-        private TreeContainer _containerInstance;
-        
-        public LoaderService(IUnitOfWork unitOfWork, TreeContainer container, IMapper<EmployeeEntity, Employee> employeeMapper)
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper<EmployeeEntity, Employee> _employeeMapper;
+
+        public LoaderService(IUnitOfWork unitOfWork, IMapper<EmployeeEntity, Employee> employeeMapper)
         {
             _unitOfWork = unitOfWork;
             _employeeMapper = employeeMapper;
-            _containerInstance = container;
         }
 
-        public void LoadData()
+        public Employee LoadData()
         {
-            _containerInstance.Root = _employeeMapper.Map(_unitOfWork.Repository<IEmployeeRepository>().GetRoot());
+            return _employeeMapper.Map(_unitOfWork.Repository<IEmployeeRepository>().GetRoot());
         }
 
-        public void SaveData()
+        public void SaveData(Employee employee)
         {
             throw new System.NotImplementedException();
         }

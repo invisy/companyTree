@@ -27,7 +27,8 @@ namespace CompanyTree.BLL.Implementation
         public static void BindBLL(this IIoCContainer container)
         {
             container.Register<ILoaderService, LoaderServiceDummy>();
-            container.Register<ICompanyTreeService, CompanyTreeService>();
+            container.Register<ICompanyTreeStructuringService, CompanyTreeStructuringService>();
+            container.Register<ICompanyTreeFinderService, CompanyTreeFinderService>();
             container.Register<IWithHigherSalaryFinderVisitor, WithHigherSalaryFinderVisitor>();
             container.Register<IWithPositionFinderVisitor, WithPositionFinderVisitor>();
             container.Register<IWithMaxSalaryFinderVisitor, WithMaxSalaryFinderVisitor>();
@@ -35,7 +36,6 @@ namespace CompanyTree.BLL.Implementation
             container.Register<ICompanyStructureDirectStrategy, CompanyStructureDirectStrategy>();
             container.Register<ICompanyStructureByPositionStrategy, CompanyStructureByPositionStrategy>();
             container.Register<IMapper<EmployeeEntity, Employee>, EmployeeMapper>();
-            container.RegisterSingleton<TreeContainer, TreeContainer>();
         }
     }
 }

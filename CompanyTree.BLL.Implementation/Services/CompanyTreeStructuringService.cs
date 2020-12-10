@@ -1,16 +1,17 @@
 ﻿using System.Collections.Generic;
 using CompanyTree.BLL.Abstraction.CompanyStructureDisplay;
+using CompanyTree.BLL.Abstraction.Services;
 using CompanyTree.Models.Abstractions;
 
 namespace CompanyTree.BLL.Implementation.Services
 {
-    public class CompanyTreeFinderService
+    public class CompanyTreeStructuringService : ICompanyTreeStructuringService
     {
         private readonly ICompanyStructureDisplayOrder _displayOrder;
         private readonly ICompanyStructureDirectStrategy _directStrategy;
         private readonly ICompanyStructureByPositionStrategy _byPositionStrategy;
         
-        public CompanyTreeFinderService(ICompanyStructureDisplayOrder displayOrder, ICompanyStructureDirectStrategy directStrategy
+        public CompanyTreeStructuringService(ICompanyStructureDisplayOrder displayOrder, ICompanyStructureDirectStrategy directStrategy
             , ICompanyStructureByPositionStrategy byPositionStrategy)
         {
             _displayOrder = displayOrder;

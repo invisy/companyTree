@@ -6,9 +6,9 @@ namespace CompanyTree.Models.Abstractions
 {
     public abstract class Employee : BaseModel<int>, IVisitable
     {
-        public string Name { get; private set; }
-        public int Salary { get; private set; }
-        public Position Position { get; private set; }
+        public string Name { get;  }
+        public int Salary { get;  }
+        public Position Position { get; }
         public Employee Supervisor { get; protected set; }
         
         public abstract bool IsComposite();

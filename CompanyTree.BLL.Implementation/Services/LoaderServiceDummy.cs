@@ -1,17 +1,19 @@
-﻿using CompanyTree.BLL.Abstraction.Services;
+﻿using System;
+using CompanyTree.BLL.Abstraction.Services;
+using CompanyTree.Models.Abstractions;
 
 namespace CompanyTree.BLL.Implementation.Services
 {
     public class LoaderServiceDummy : ILoaderService
     {
-        public void LoadData()
+        public Employee LoadData()
         {
-            
+            return null;
         }
 
-        public void SaveData()
+        public void SaveData(Employee employee)
         {
-            
+            throw new NotImplementedException();
         }
     }
 }
