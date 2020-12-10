@@ -13,7 +13,7 @@ namespace CompanyTree.Tests
     public class ByPositionStrategyTest
     {
         [Fact]
-        public void RightOrderTest()
+        public void GetStructure_CompanyTree_ReturnsByPositionOrder()
         {
             //Arrange
             Mock<Employee> employeeX = new Moq.Mock<Employee>("employeeX", 1000, Position.EmployeeX); 

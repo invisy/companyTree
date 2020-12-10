@@ -6,8 +6,6 @@ namespace CompanyTree.BLL.Abstraction.Services
 {
     public interface ICompanyTreeService
     {
-        Employee GetRoot();
-        void SetRoot(Employee root);
         IEnumerable<Employee> GetEmployeesWithMaxSalary(Employee root);
         IEnumerable<Employee> GetEmployeesWithHigherSalary(Employee root, int salary);
         IEnumerable<Employee> GetEmployeesWithPosition(Employee root, Position position);

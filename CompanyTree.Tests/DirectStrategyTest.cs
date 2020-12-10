@@ -13,7 +13,7 @@ namespace CompanyTree.Tests
     public class DirectStrategyTest
     {
         [Fact]
-        public void RightOrderTest()
+        public void GetStructure_CompanyTree_ReturnsDirectOrder()
         {
             //Arrange
             Mock<Employee> employeeX = new Moq.Mock<Employee>("employeeX", 1000, Position.EmployeeX); 
