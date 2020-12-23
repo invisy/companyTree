@@ -8,7 +8,7 @@ namespace CompanyTree.UI.Exceptions
         {
             
         }
-        public InvalidInputException(string error) : base(error)
+        public InvalidInputException(string message) : base(message)
         {
             
         }

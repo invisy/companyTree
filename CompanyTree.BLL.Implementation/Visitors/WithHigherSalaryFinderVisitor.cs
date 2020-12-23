@@ -45,7 +45,9 @@ namespace CompanyTree.BLL.Implementation.Visitors
 
         public IEnumerable<Employee> GetEmployees()
         {
-            return _employees;
+            List<Employee> clone = new List<Employee>(_employees);
+            _employees.Clear();
+            return clone;
         }
     }
 }

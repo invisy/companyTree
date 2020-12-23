@@ -11,7 +11,7 @@ using Xunit;
 
 namespace CompanyTree.Tests
 {
-    public class WithPositionFinderVisitorTest
+    public class WithMaxSalaryFinderVisitorTest
     {
         private Mock<EmployeeX> employeeX;
         private Mock<EmployeeY> employeeY;
@@ -23,7 +23,7 @@ namespace CompanyTree.Tests
         private Mock<SalesManager> salesManager;
         private Mock<Director> director;
         
-        public WithPositionFinderVisitorTest()
+        public WithMaxSalaryFinderVisitorTest()
         {
             employeeX2 = new Moq.Mock<EmployeeX>("employeeX", 150, null);
             employeeX2.Setup(e => e.IsComposite()).Returns(false);
@@ -41,7 +41,7 @@ namespace CompanyTree.Tests
             employeeY.Setup(e => e.IsComposite()).Returns(false);
             employeeY.Setup(e => e.Accept(It.IsAny<IVisitor>())).Callback<IVisitor>(v => v.Visit(employeeY.Object));
             
-            employeeA = new Moq.Mock<EmployeeA>("employeeA", 500, null);
+            employeeA = new Moq.Mock<EmployeeA>("employeeA", 1200, null);
             employeeA.Setup(e => e.IsComposite()).Returns(false);
             employeeA.Setup(e => e.Accept(It.IsAny<IVisitor>())).Callback<IVisitor>(v => v.Visit(employeeA.Object));
             
@@ -69,7 +69,7 @@ namespace CompanyTree.Tests
         public void VisitedAll()
         {
             //Arrange
-            WithPositionFinderVisitor visitor = new WithPositionFinderVisitor();
+            WithMaxSalaryFinderVisitor visitor = new WithMaxSalaryFinderVisitor();
 
             //Act
             director.Object.Accept(visitor);
@@ -86,12 +86,11 @@ namespace CompanyTree.Tests
         }
 
         [Fact]
-        public void GetEmployees_ReturnsEmployeeListWithPosition()
+        public void GetEmployees_ReturnsEmployeeListWithMaxSalary()
         {
             //Arrange
-            WithPositionFinderVisitor visitor = new WithPositionFinderVisitor();
-            visitor.Position = Position.EmployeeX;
-            List<Employee> expectedResult = new List<Employee>(new Employee[] { employeeX.Object, employeeX2.Object });
+            WithMaxSalaryFinderVisitor visitor = new WithMaxSalaryFinderVisitor();
+            List<Employee> expectedResult = new List<Employee>(new Employee[] { supplyManager.Object, employeeA.Object });
 
             //Act
             director.Object.Accept(visitor);

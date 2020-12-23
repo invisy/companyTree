@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using CompanyTree.Models.Abstractions;
+using CompanyTree.Models.Exceptions.Employee;
 
 namespace CompanyTree.Models
 {
@@ -13,17 +14,12 @@ namespace CompanyTree.Models
 
         public override void Add(Employee employee)
         {
-            throw new System.NotImplementedException();
-        }
-
-        public override void Remove(Employee employee)
-        {
-            throw new System.NotImplementedException();
+            throw new IsNotCompositeException();
         }
 
         public override IEnumerable<Employee> GetChildren()
         {
-            throw new System.NotImplementedException();
+            throw new IsNotCompositeException();
         }
 
         public override bool HasSupervisor()

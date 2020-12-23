@@ -41,7 +41,9 @@ namespace CompanyTree.BLL.Implementation.Visitors
 
         public IEnumerable<Employee> GetEmployees()
         {
-            return _employees;
+            List<Employee> clone = new List<Employee>(_employees);
+            _employees.Clear();
+            return clone;
         }
 
         private void CheckMaxSalary(Employee employee)
@@ -51,7 +53,7 @@ namespace CompanyTree.BLL.Implementation.Visitors
                 _employees.Clear();
                 _employees.Add(employee);
             }
-            else if(_employees[0].Salary == employee.Salary)
+            else if((_employees.Count > 0 && _employees[0].Salary == employee.Salary) || _employees.Count == 0)
             {
                 _employees.Add(employee);
             }

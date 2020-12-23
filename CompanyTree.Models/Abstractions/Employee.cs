@@ -14,7 +14,6 @@ namespace CompanyTree.Models.Abstractions
         public abstract bool IsComposite();
 
         public abstract void Add(Employee employee);
-        public abstract void Remove(Employee employee);
         public abstract IEnumerable<Employee> GetChildren();
 
         public abstract bool HasSupervisor();

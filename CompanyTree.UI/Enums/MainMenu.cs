@@ -4,6 +4,7 @@
     {
         Exit,
         AddEmployee,
+        ShowListOfEmployees,
         SelectFindWithMaxSalary,
         SelectFindWithHigherSalary,
         SelectFindWithPosition

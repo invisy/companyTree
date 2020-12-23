@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using CompanyTree.Models.Abstractions;
 
 namespace CompanyTree.Models
@@ -15,12 +16,9 @@ namespace CompanyTree.Models
         
         public override void Add(Employee component)
         {
+            if(component is null)
+                throw new ArgumentNullException("Can`t add null employee");
             _children.Add(component);
-        }
-
-        public override void Remove(Employee component)
-        {
-            _children.Remove(component);
         }
 
         public override IEnumerable<Employee> GetChildren()

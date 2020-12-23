@@ -11,7 +11,7 @@ using Xunit;
 
 namespace CompanyTree.Tests
 {
-    public class WithPositionFinderVisitorTest
+    public class WithHigherSalaryVisitorTest
     {
         private Mock<EmployeeX> employeeX;
         private Mock<EmployeeY> employeeY;
@@ -23,7 +23,7 @@ namespace CompanyTree.Tests
         private Mock<SalesManager> salesManager;
         private Mock<Director> director;
         
-        public WithPositionFinderVisitorTest()
+        public WithHigherSalaryVisitorTest()
         {
             employeeX2 = new Moq.Mock<EmployeeX>("employeeX", 150, null);
             employeeX2.Setup(e => e.IsComposite()).Returns(false);
@@ -69,11 +69,10 @@ namespace CompanyTree.Tests
         public void VisitedAll()
         {
             //Arrange
-            WithPositionFinderVisitor visitor = new WithPositionFinderVisitor();
+            WithHigherSalaryFinderVisitor visitor = new WithHigherSalaryFinderVisitor();
 
             //Act
             director.Object.Accept(visitor);
-            
             //Assert
             director.Verify(x => x.Accept(It.IsAny<IVisitor>()), Times.Once());
             salesManager.Verify(x => x.Accept(It.IsAny<IVisitor>()), Times.Once());
@@ -86,12 +85,12 @@ namespace CompanyTree.Tests
         }
 
         [Fact]
-        public void GetEmployees_ReturnsEmployeeListWithPosition()
+        public void GetEmployees_ReturnsEmployeeListWithHigherSalary()
         {
             //Arrange
-            WithPositionFinderVisitor visitor = new WithPositionFinderVisitor();
-            visitor.Position = Position.EmployeeX;
-            List<Employee> expectedResult = new List<Employee>(new Employee[] { employeeX.Object, employeeX2.Object });
+            WithHigherSalaryFinderVisitor visitor = new WithHigherSalaryFinderVisitor();
+            visitor.Salary = 999;
+            List<Employee> expectedResult = new List<Employee>(new Employee[] { supplyManager.Object, employeeY.Object });
 
             //Act
             director.Object.Accept(visitor);
