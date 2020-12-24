@@ -19,12 +19,27 @@ namespace CompanyTree.BLL.Implementation.Services
             _employeeMapper = employeeMapper;
         }
 
+        public Employee getRoot()
+        {
+            throw new System.NotImplementedException();
+        }
+
         public Employee LoadData()
         {
             return _employeeMapper.Map(_unitOfWork.Repository<IEmployeeRepository>().GetRoot());
         }
 
-        public void SaveData(Employee employee)
+        public void SaveData()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void setRoot(Employee employee)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        void ILoaderService.LoadData()
         {
             throw new System.NotImplementedException();
         }

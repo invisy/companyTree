@@ -1,6 +1,7 @@
 ﻿using System;
 using CompanyTree.BLL.Implementation;
 using CompanyTree.Utils;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace CompanyTree.UI
 {
@@ -8,11 +9,13 @@ namespace CompanyTree.UI
     {     
         private static void Main(string[] args)
         {
-            IIoCContainer container = new MyIoCContainer();
-            container.Register<CliController, CliController>();
-            container.Register<CliView, CliView>();
-            container.BindBLL();
-            CliController controller = container.Resolve<CliController>();
+            var serviceProvider = new ServiceCollection()
+            .AddTransient<CliController, CliController>()
+            .AddTransient<CliView, CliView>()
+            .BindBLL()
+            .BuildServiceProvider();
+
+            CliController controller = serviceProvider.GetService<CliController>();
             controller.ShowMenu();
         }
     }

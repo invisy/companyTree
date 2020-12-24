@@ -18,24 +18,26 @@ using CompanyTree.BLL.Implementation.Visitors;
 using CompanyTree.Entities;
 using CompanyTree.Models;
 using CompanyTree.Models.Abstractions;
-
+using Microsoft.Extensions.DependencyInjection;
 
 namespace CompanyTree.BLL.Implementation
 {
     public static class BLLBinder
     {
-        public static void BindBLL(this IIoCContainer container)
+        public static IServiceCollection BindBLL(this IServiceCollection services)
         {
-            container.Register<ILoaderService, LoaderServiceDummy>();
-            container.Register<ICompanyTreeStructuringService, CompanyTreeStructuringService>();
-            container.Register<ICompanyTreeFinderService, CompanyTreeFinderService>();
-            container.Register<IWithHigherSalaryFinderVisitor, WithHigherSalaryFinderVisitor>();
-            container.Register<IWithPositionFinderVisitor, WithPositionFinderVisitor>();
-            container.Register<IWithMaxSalaryFinderVisitor, WithMaxSalaryFinderVisitor>();
-            container.Register<ICompanyStructureDisplayOrder, CompanyStructureDisplayOrder>();
-            container.Register<ICompanyStructureDirectStrategy, CompanyStructureDirectStrategy>();
-            container.Register<ICompanyStructureByPositionStrategy, CompanyStructureByPositionStrategy>();
-            container.Register<IMapper<EmployeeEntity, Employee>, EmployeeMapper>();
+            services.AddScoped<ILoaderService, LoaderServiceDummy>();
+            services.AddScoped<ICompanyTreeStructuringService, CompanyTreeStructuringService>();
+            services.AddScoped<ICompanyTreeFinderService, CompanyTreeFinderService>();
+            services.AddTransient<IWithHigherSalaryFinderVisitor, WithHigherSalaryFinderVisitor>();
+            services.AddTransient<IWithPositionFinderVisitor, WithPositionFinderVisitor>();
+            services.AddTransient<IWithMaxSalaryFinderVisitor, WithMaxSalaryFinderVisitor>();
+            services.AddTransient<ICompanyStructureDisplayOrder, CompanyStructureDisplayOrder>();
+            services.AddTransient<ICompanyStructureDirectStrategy, CompanyStructureDirectStrategy>();
+            services.AddTransient<ICompanyStructureByPositionStrategy, CompanyStructureByPositionStrategy>();
+            services.AddTransient<IMapper<EmployeeEntity, Employee>, EmployeeMapper>();
+
+            return services;
         }
     }
 }

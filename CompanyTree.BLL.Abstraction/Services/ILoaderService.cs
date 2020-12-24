@@ -4,7 +4,9 @@ namespace CompanyTree.BLL.Abstraction.Services
 {
     public interface ILoaderService
     {
-        Employee LoadData();
-        void SaveData(Employee employee);
+        void setRoot(Employee employee);
+        Employee getRoot();
+        void LoadData();
+        void SaveData();
     }
 }

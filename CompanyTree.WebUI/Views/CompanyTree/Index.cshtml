@@ -1,0 +1,49 @@
+﻿@model IEnumerable<CompanyTree.Models.Abstractions.Employee>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>List of Employees</h1>
+
+<p>
+    <a asp-action="Create">Add new employee</a>
+    <br>
+    <a asp-action="DirectOrder">Show all in direct order</a> |
+    <a asp-action="ByPositionOrder">Show all by position</a>
+    <br>
+    <a asp-action="FindWithMaxSalary">Find employees with max salary</a> |
+    <a asp-action="FindWithHigherSalary">Find employees with salary higher than...</a> |
+    <a asp-action="FindWithPosition">Find employees with position</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Position)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Salary)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Position)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Salary)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

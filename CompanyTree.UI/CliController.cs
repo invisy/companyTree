@@ -27,7 +27,8 @@ namespace CompanyTree.UI
             _companyTreeStructuringService = companyTreeStructuringService;
             _loaderService = loaderService;
             _view = cliView;
-            _root = _loaderService.LoadData();
+            _loaderService.LoadData();
+            _root = _loaderService.getRoot();
         }
         
         public void ShowMenu()
