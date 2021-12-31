@@ -14,10 +14,9 @@ namespace CompanyTree.DAL.Implementation.Repositories
         
         public EmployeeEntity GetRoot()
         {
-            IQueryable<EmployeeEntity> rootQueryable = dbSet.AsQueryable().Where(employee => employee.parentId == null);
-            List<EmployeeEntity> list = rootQueryable.ToList();
-            if (list.Count() > 0)
-                return list[0];
+            List<EmployeeEntity> root = dbSet.Where(employee => employee.positionId == null).ToList();
+            if (root.Any())
+                return root[0];
             return null;
         }
     }
