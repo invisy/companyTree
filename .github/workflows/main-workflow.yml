@@ -1,0 +1,32 @@
+name: Main workflow
+on: 
+  push:
+    branches: [ master ]
+    
+  pull_request:
+    branches: [ master ]
+    
+jobs:
+  Build_clients:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1.7.2
+        with:
+            dotnet-version: '3.1.x'
+      - name: Install dependencies for console client
+        run: dotnet restore
+        working-directory: ./CompanyTree.UI
+      - name: Build console client
+        run: dotnet build -c Release --no-restore
+        working-directory: ./CompanyTree.UI
+      - name: Install dependencies for web client
+        run: dotnet restore
+        working-directory: ./CompanyTree.WebUI
+      - name: Build web client
+        run: dotnet build -c Release --no-restore
+        working-directory: ./CompanyTree.WebUI
+      - name: Unit tests
+        run: dotnet test --no-restore --verbosity normal
