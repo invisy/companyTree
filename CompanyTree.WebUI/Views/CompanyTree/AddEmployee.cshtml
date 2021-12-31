@@ -1,0 +1,54 @@
+﻿@using CompanyTree.Models.Abstractions;
+@model CompanyTree.WebUI.Models.AddEmployeeVM
+
+@{
+    ViewData["Title"] = "Add Employee";
+}
+
+<h4>Add Employee</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddEmployee">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Salary" class="control-label"></label>
+                <input asp-for="Salary" class="form-control" />
+                <span asp-validation-for="Salary" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Position" class="control-label"></label>
+                <select asp-for="Position" asp-items="Html.GetEnumSelectList<Position>()"></select>
+                <span asp-validation-for="Position" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SelectedParentId" class="control-label">Parent</label>
+                <select asp-for="SelectedParentId"
+                        asp-items="@(new SelectList(Model.Parent,"Id","Name").Prepend(new SelectListItem("Root", "0")))">
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="SelectedSupervisorId" class="control-label">Supervisor</label>
+                <select asp-for="SelectedSupervisorId"
+                        asp-items="@(new SelectList(Model.Supervisor,"Id","Name").Prepend(new SelectListItem("Root", "0")))">
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Add" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

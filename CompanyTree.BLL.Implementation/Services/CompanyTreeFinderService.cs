@@ -13,13 +13,16 @@ namespace CompanyTree.BLL.Implementation.Services
         private readonly IWithHigherSalaryFinderVisitor _withHigherSalaryFinderVisitor;
         private readonly IWithMaxSalaryFinderVisitor _withMaxSalaryFinderVisitor;
         private readonly IWithPositionFinderVisitor _withPositionFinderVisitor;
-        
+        private readonly IWithIdFinderVisitor _withIdFinderVisitor;
+
         public CompanyTreeFinderService(IWithHigherSalaryFinderVisitor withHigherSalaryFinderVisitor,
-            IWithMaxSalaryFinderVisitor withMaxSalaryFinderVisitor, IWithPositionFinderVisitor withPositionFinderVisitor)
+            IWithMaxSalaryFinderVisitor withMaxSalaryFinderVisitor, IWithPositionFinderVisitor withPositionFinderVisitor, 
+            IWithIdFinderVisitor withIdFinderVisitor)
         {
             _withHigherSalaryFinderVisitor = withHigherSalaryFinderVisitor;
             _withMaxSalaryFinderVisitor = withMaxSalaryFinderVisitor;
             _withPositionFinderVisitor = withPositionFinderVisitor;
+            _withIdFinderVisitor = withIdFinderVisitor;
         }
 
         public IEnumerable<Employee> GetEmployeesWithMaxSalary(Employee employee)
@@ -49,6 +52,17 @@ namespace CompanyTree.BLL.Implementation.Services
                 throw new NoNullAllowedException("Employee root can`t be null");
             var visitor = _withPositionFinderVisitor;
             visitor.Position = position;
+            employee.Accept(visitor);
+
+            return visitor.GetEmployees();
+        }
+
+        public IEnumerable<Employee> GetEmployeesWithId(Employee employee, int id)
+        {
+            if (employee == null)
+                throw new NoNullAllowedException("Employee root can`t be null");
+            var visitor = _withIdFinderVisitor;
+            visitor.Id = id;
             employee.Accept(visitor);
 
             return visitor.GetEmployees();

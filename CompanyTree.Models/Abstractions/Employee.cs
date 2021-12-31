@@ -22,6 +22,7 @@ namespace CompanyTree.Models.Abstractions
         protected Employee(string name, int salary, Position position)
         {
             Id = counter + 1;
+            counter++;
             Name = name;
             Salary = salary;
             Position = position;

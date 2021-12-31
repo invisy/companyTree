@@ -32,6 +32,7 @@ namespace CompanyTree.BLL.Implementation
             services.AddTransient<IWithHigherSalaryFinderVisitor, WithHigherSalaryFinderVisitor>();
             services.AddTransient<IWithPositionFinderVisitor, WithPositionFinderVisitor>();
             services.AddTransient<IWithMaxSalaryFinderVisitor, WithMaxSalaryFinderVisitor>();
+            services.AddTransient<IWithIdFinderVisitor, WithIdFinderVisitor>();
             services.AddTransient<ICompanyStructureDisplayOrder, CompanyStructureDisplayOrder>();
             services.AddTransient<ICompanyStructureDirectStrategy, CompanyStructureDirectStrategy>();
             services.AddTransient<ICompanyStructureByPositionStrategy, CompanyStructureByPositionStrategy>();
