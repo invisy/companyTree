@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CompanyTree.BLL.Implementation;
+using CompanyTree.DAL.Implementation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -25,6 +26,9 @@ namespace CompanyTree.WebUI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            
+            string connectionString = Configuration.GetConnectionString("CompanyTreeDb");
+            services.BindDAL(connectionString);
             services.BindBLL();
         }
 
